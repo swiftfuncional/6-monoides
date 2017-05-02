@@ -27,7 +27,7 @@ class AddUserUseCase {
 let useCase = AddUserUseCase()
 
 do {
-	try useCase.add(name: "Alex", password: "functionalswift")
+	try useCase.add(name: "AlexSwiftFuncional", password: "functionalswift")
 } catch UserError.UsernameOutOfBounds {
 	print("ERROR: Username out of bounds")
 } catch UserError.PasswordTooShort {
