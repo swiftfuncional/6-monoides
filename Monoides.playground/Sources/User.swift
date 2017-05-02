@@ -7,3 +7,8 @@ public struct User {
 		self.password = password
 	}
 }
+
+public enum UserError: Error {
+	case UsernameOutOfBounds
+	case PasswordTooShort
+}
