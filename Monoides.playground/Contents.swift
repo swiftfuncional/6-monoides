@@ -32,3 +32,19 @@ let useCase = AddUserUseCase()
 useCase.add(name: "Alex", password: "functional").map {
 	print("SUCCESS: User created - \($0)")
 }
+
+/* Another example */
+enum FormatError {
+	case MustBeInt
+}
+
+func mustBeInt(_ string: String) -> Result<String, FormatError> {
+	if Int(string) != nil {
+		return .Success(string)
+	}
+
+	return .Failure(.MustBeInt)
+}
+
+mustBeInt("30")
+mustBeInt("1aa0")
