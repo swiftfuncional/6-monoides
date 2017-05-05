@@ -13,7 +13,7 @@ class AddUserUseCase {
 
 		let user = User(name: name, password: password)
 
-		return .Success(try db.create(user))
+		return .Success(db.create(user))
 	}
 
 	internal func validate(name: String) -> UserError? {
@@ -35,6 +35,6 @@ class AddUserUseCase {
 
 let useCase = AddUserUseCase()
 
-try useCase.add(name: "Alex", password: "functional").map {
+useCase.add(name: "Alex", password: "functional").map {
 	print("SUCCESS: User created - \($0)")
 }

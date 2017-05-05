@@ -4,7 +4,7 @@ public class UserDatabase {
 		
 	}
 
-	public func create(_ user: User) throws -> User {
+	public func create(_ user: User) -> User {
 		//... some logic
 
 		return user
