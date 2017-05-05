@@ -47,5 +47,6 @@ func mustBeGreaterThan10 (_ number: Int) -> Result<Int, FormatError> {
 	return number > 10 ? .Success(number) : .Failure(.MustBeGreaterThanTen)
 }
 
-mustBeInt("30")
-mustBeInt("1aa0")
+(mustBeInt && mustBeGreaterThan10)("30")
+(mustBeInt && mustBeGreaterThan10)("1aa0")
+(mustBeInt && mustBeGreaterThan10)("5")
