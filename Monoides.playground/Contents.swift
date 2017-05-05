@@ -11,16 +11,12 @@ class AddUserUseCase {
 		return try db.create(user)
 	}
 
-	internal func validate(name: String) throws {
-		if name.isEmpty || name.characters.count > 15 {
-			throw UserError.UsernameOutOfBounds
-		}
+	internal func validate(name: String) -> Bool {
+		return !name.isEmpty && name.characters.count <= 15
 	}
 
-	internal func validate(password: String) throws {
-		if password.characters.count < 15 {
-			throw UserError.PasswordTooShort
-		}
+	internal func validate(password: String) -> Bool {
+		return password.characters.count >= 10
 	}
 }
 
