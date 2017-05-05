@@ -2,17 +2,15 @@ class AddUserUseCase {
 
 	let db = UserDatabase()
 
-	func add(name: String, password: String) throws -> Bool {
+	func add(name: String, password: String) throws -> User? {
 		if validate(name: name) && validate(password: password) {
 
 			let user = User(name: name, password: password)
 
-			try db.create(user)
-
-			return true
+			return try db.create(user)
 		}
 
-		return false
+		return nil
 	}
 
 	internal func validate(name: String) -> Bool {
@@ -26,8 +24,8 @@ class AddUserUseCase {
 
 let useCase = AddUserUseCase()
 
-if try useCase.add(name: "Alex", password: "functional") {
-	print("SUCCESS: User created")
+if let user = try useCase.add(name: "Alex", password: "functional") {
+	print("SUCCESS: User created - \(user)")
 } else {
 	print("ERROR: Something is wrong")
 }
