@@ -38,12 +38,8 @@ enum FormatError {
 	case MustBeInt
 }
 
-func mustBeInt(_ string: String) -> Result<String, FormatError> {
-	if Int(string) != nil {
-		return .Success(string)
-	}
-
-	return .Failure(.MustBeInt)
+func mustBeInt(_ string: String) -> Result<Int, FormatError> {
+	return Int(string).flatMap { .Success($0) } ?? .Failure(.MustBeInt)
 }
 
 mustBeInt("30")
