@@ -14,20 +14,20 @@ class AddUserUseCase {
 		return .Success(db.create(user))
 	}
 
-	internal func validateName(of user: User) -> UserError? {
+	internal func validateName(of user: User) -> Result<User, UserError> {
 		if !user.name.isEmpty && user.name.characters.count <= 15 {
-			return nil
+			return .Success(user)
 		}
 
-		return .UsernameOutOfBounds
+		return .Failure(.UsernameOutOfBounds)
 	}
 
-	internal func validatePassword(of user: User) -> UserError? {
+	internal func validatePassword(of user: User) -> Result<User, UserError> {
 		if user.password.characters.count >= 10 {
-			return nil
+			return .Success(user)
 		}
 
-		return .PasswordTooShort
+		return .Failure(.PasswordTooShort)
 	}
 }
 
