@@ -36,10 +36,15 @@ useCase.add(name: "Alex", password: "functional").map {
 /* Another example */
 enum FormatError {
 	case MustBeInt
+	case MustBeGreaterThanTen
 }
 
 func mustBeInt(_ string: String) -> Result<Int, FormatError> {
 	return Int(string).flatMap { .Success($0) } ?? .Failure(.MustBeInt)
+}
+
+func mustBeGreaterThan10 (_ number: Int) -> Result<Int, FormatError> {
+	return number > 10 ? .Success(number) : .Failure(.MustBeGreaterThanTen)
 }
 
 mustBeInt("30")
