@@ -12,3 +12,18 @@ public enum UserError {
 	case UsernameOutOfBounds
 	case PasswordTooShort
 }
+
+public class UserValidator {
+
+	public class var Name: Validator<User, UserError> {
+		return validate(.UsernameOutOfBounds) {
+			!$0.name.isEmpty && $0.name.characters.count <= 15
+		}
+	}
+
+	public class var Password: Validator<User, UserError> {
+		return validate(.PasswordTooShort) {
+			$0.password.characters.count >= 10
+		}
+	}
+}
