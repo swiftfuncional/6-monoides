@@ -15,3 +15,7 @@ public func &&<T, E>(
 		}
 	}
 }
+
+public func validate<T, E>(_ reason: E, _ condition: @escaping (T) -> Bool) -> Validator<T, E> {
+	return { condition($0) ? .Success($0) : .Failure(reason) }
+}
