@@ -2,15 +2,18 @@ class AddUserUseCase {
 
 	let db = UserDatabase()
 
-	func add(name: String, password: String) throws -> User? {
-		if validate(name: name) && validate(password: password) {
-
-			let user = User(name: name, password: password)
-
-			return try db.create(user)
+	func add(name: String, password: String) throws -> Result<User, UserError> {
+		if let reason = validate(name: name) {
+			return .Failure(reason)
 		}
 
-		return nil
+		if let reason = validate(password: password) {
+			return .Failure(reason)
+		}
+
+		let user = User(name: name, password: password)
+
+		return .Success(try db.create(user))
 	}
 
 	internal func validate(name: String) -> UserError? {
