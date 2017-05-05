@@ -8,7 +8,7 @@ public struct User {
 	}
 }
 
-public enum UserError: Error {
+public enum UserError {
 	case UsernameOutOfBounds
 	case PasswordTooShort
 }
