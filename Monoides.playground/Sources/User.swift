@@ -21,7 +21,7 @@ public enum UserError {
 
 public class UserValidator {
 
-	public static var all: [Validator<User, UserError>] = []
+	public static var all = [Name, Password, (Premium || Newsletter)]
 
 	public class var Name: Validator<User, UserError> {
 		return validate(.UsernameOutOfBounds) {
