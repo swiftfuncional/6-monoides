@@ -1,6 +1,8 @@
+public typealias Validator<T, E> = (T) -> Result<T,E>
+
 public func &&<T, E>(
-	_ firstValidator: @escaping (T) -> Result<T,E>,
-	_ secondValidator: @escaping (T) -> Result<T,E>) -> (T) -> Result<T,E> {
+	_ firstValidator: @escaping Validator<T, E>,
+	_ secondValidator: @escaping Validator<T, E>) -> Validator<T, E> {
 
 	return { t in
 		let result = firstValidator(t)
