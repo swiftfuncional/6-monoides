@@ -24,8 +24,6 @@ class AddUserUseCase {
 
 let useCase = AddUserUseCase()
 
-if let user = try useCase.add(name: "Alex", password: "functional") {
-	print("SUCCESS: User created - \(user)")
-} else {
-	print("ERROR: Something is wrong")
+try useCase.add(name: "Alex", password: "functional").map {
+	print("SUCCESS: User created - \($0)")
 }
