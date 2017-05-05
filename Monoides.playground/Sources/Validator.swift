@@ -1,17 +1,15 @@
 public func &&<T, E>(
-	_ firstValidator: @escaping (T) -> E?,
-	_ secondValidator: @escaping (T) -> E?) -> (T) -> E? {
+	_ firstValidator: @escaping (T) -> Result<T,E>,
+	_ secondValidator: @escaping (T) -> Result<T,E>) -> (T) -> Result<T,E> {
 
 	return { t in
+		let result = firstValidator(t)
 
-		if let reason = firstValidator(t) {
-			return reason
+		switch result {
+		case .Failure:
+			return result
+		case let .Success(t1):
+			return secondValidator(t1)
 		}
-
-		if let reason = secondValidator(t) {
-			return reason
-		}
-
-		return nil
 	}
 }
