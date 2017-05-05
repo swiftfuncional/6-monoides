@@ -37,6 +37,6 @@ public func validate<T, E>(_ reason: E, _ condition: @escaping (T) -> Bool) -> V
 }
 
 public func allOf<T, E>(_ validators: [Validator<T, E>]) -> Validator<T, E> {
-	let (head, tail) = (validators[0], Array(validators[1..<validators.count]))
-	return tail.reduce(head) { $0 && $1 }
+	let identity: Validator<T, E> = { .Success($0) }
+	return validators.reduce(identity) { $0 && $1 }
 }
