@@ -15,6 +15,8 @@ public struct User {
 public enum UserError {
 	case UsernameOutOfBounds
 	case PasswordTooShort
+	case MustBePremium
+	case MustBeSubscribeToNewsletter
 }
 
 public class UserValidator {
@@ -28,6 +30,18 @@ public class UserValidator {
 	public class var Password: Validator<User, UserError> {
 		return validate(.PasswordTooShort) {
 			$0.password.characters.count >= 10
+		}
+	}
+
+	public class var Premium: Validator<User, UserError> {
+		return validate(.MustBePremium) {
+			$0.premium
+		}
+	}
+
+	public class var Newsletter: Validator<User, UserError> {
+		return validate(.MustBeSubscribeToNewsletter) {
+			$0.newsletter
 		}
 	}
 }
