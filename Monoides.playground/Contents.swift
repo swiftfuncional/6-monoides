@@ -7,11 +7,7 @@ class AddUserUseCase {
 
 		let validator = validateName && validatePassword
 
-		if let reason = validator(user) {
-			return .Failure(reason)
-		}
-
-		return .Success(db.create(user))
+		return validator(user).map(db.create)
 	}
 
 	internal func validateName(of user: User) -> Result<User, UserError> {
