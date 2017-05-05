@@ -5,8 +5,7 @@ class AddUserUseCase {
 	func add(name: String, password: String) -> Result<User, UserError> {
 		let user = User(name: name, password: password)
 
-		let validator = UserValidator.Name && UserValidator.Password &&
-						(UserValidator.Premium || UserValidator.Newsletter)
+		let validator = allOf(UserValidator.all)
 
 		return validator(user).map(db.create)
 	}
