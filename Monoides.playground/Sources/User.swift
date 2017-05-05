@@ -21,6 +21,8 @@ public enum UserError {
 
 public class UserValidator {
 
+	public static var all = [Name, Password, (Premium || Newsletter)]
+
 	public class var Name: Validator<User, UserError> {
 		return validate(.UsernameOutOfBounds) {
 			!$0.name.isEmpty && $0.name.characters.count <= 15
