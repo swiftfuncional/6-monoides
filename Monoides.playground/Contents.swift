@@ -13,12 +13,20 @@ class AddUserUseCase {
 		return nil
 	}
 
-	internal func validate(name: String) -> Bool {
-		return !name.isEmpty && name.characters.count <= 15
+	internal func validate(name: String) -> UserError? {
+		if !name.isEmpty && name.characters.count <= 15 {
+			return nil
+		}
+
+		return .UsernameOutOfBounds
 	}
 
-	internal func validate(password: String) -> Bool {
-		return password.characters.count >= 10
+	internal func validate(password: String) -> UserError? {
+		if password.characters.count >= 10 {
+			return nil
+		}
+
+		return .PasswordTooShort
 	}
 }
 
